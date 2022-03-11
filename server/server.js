@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const res = require('express/lib/response');
 const app = express();
 const PORT = 5000;
 
@@ -18,6 +18,14 @@ app.get('/calculate', (req, res) => {
     console.log('Getting /calculate!');
 
     res.send(calculationHistory);
+})
+
+app.post('/calculate', (req, res) => {
+    console.log('Posting to /calculate!');
+
+    calculationHistory.push(req.body)
+
+    res.sendStatus(201);
 })
 
 app.listen(PORT, () => {
