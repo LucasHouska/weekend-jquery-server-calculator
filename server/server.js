@@ -13,16 +13,16 @@ const calculationHistory = [];
 
 
 function calculate(inputs) {
-    if(inputs.symbol === 'add'){
+    if(inputs.symbol === '+'){
         console.log(Number(inputs.numOne) + Number(inputs.numTwo));
         inputs.result = Number(inputs.numOne) + Number(inputs.numTwo)
-    } else if(inputs.symbol ==='subtract'){
+    } else if(inputs.symbol ==='-'){
         console.log(Number(inputs.numOne) - Number(inputs.numTwo));
         inputs.result = Number(inputs.numOne) - Number(inputs.numTwo)
-    } else if(inputs.symbol === 'multiply'){
+    } else if(inputs.symbol === '*'){
         console.log(Number(inputs.numOne) * Number(inputs.numTwo));
         inputs.result = Number(inputs.numOne) * Number(inputs.numTwo)
-    } else if(inputs.symbol === 'divide'){
+    } else if(inputs.symbol === '/'){
         console.log(Number(inputs.numOne) / Number(inputs.numTwo));
         inputs.result = Number(inputs.numOne) / Number(inputs.numTwo)
     } else{

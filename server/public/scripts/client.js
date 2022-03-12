@@ -7,6 +7,7 @@ let symbol = '';
 
 function readyNow() {
     $('#equals').on('click', handleEquals);
+    $('#clearButton').on('click', handleClear);
     $('#add').on('click', handleAdd);
     $('#subtract').on('click', handleSubtract);
     $('#multiply').on('click', handleMultiply);
@@ -15,10 +16,12 @@ function readyNow() {
     
 
 function handleEquals() {
-    count++;
     numOne = $('#firstInput').val();
     numTwo = $('#secondInput').val();
     console.log(numOne, 'by', numTwo);
+    if(numOne === '' || numTwo === ''){
+        alert('Please insert a number')
+    } else {
     let objectToCalculate = {
         count: count,
         numOne: numOne,
@@ -34,7 +37,18 @@ function handleEquals() {
     }).then(function(response) {
         console.log(response);
         getCalculation();
+    }).catch(function(error){
+        console.log(error);
+        alert('error! error!')
     })
+}
+}
+
+function handleClear() {
+    $('#firstInput').val('');
+    $('#secondInput').val('');
+    symbol = '';
+    console.log('Cleared!')
 }
 
 function getCalculation() {
@@ -56,29 +70,29 @@ function render(calculations) {
     $('#calculations').text('');
 
     for (const calc of calculations) {
-        $('#calculations').append(`<p>${calc.result}</p>`)
+        $('#calculations').append(`<p>${calc.numOne} ${calc.symbol} ${calc.numTwo} = ${calc.result}</p>`)
     }
 }
 
 function handleAdd() {
     console.log('Adding...')
-    symbol = 'add';
+    symbol = '+';
 }
 
 function handleDivide() {
     console.log('Dividing...');
     
-    symbol = 'divide';
+    symbol = '/';
 }
 
 function handleMultiply() {
     console.log('Multiplying...');
     
-    symbol = 'multiply';
+    symbol = '*';
 }
 
 function handleSubtract() {
     console.log('Subtracting...');
     
-    symbol = 'subtract'
+    symbol = '-'
 }
