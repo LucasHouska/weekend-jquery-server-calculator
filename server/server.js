@@ -8,11 +8,27 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('server/public'));
 
-const calculationHistory = [{
-    numOne: 2,
-    symbol: 'Add',
-    numTwo: 2
-}];
+
+const calculationHistory = [];
+
+
+function calculate(inputs) {
+    if(inputs.symbol === 'add'){
+        console.log(Number(inputs.numOne) + Number(inputs.numTwo));
+        inputs.result = Number(inputs.numOne) + Number(inputs.numTwo)
+    } else if(inputs.symbol ==='subtract'){
+        console.log(Number(inputs.numOne) - Number(inputs.numTwo));
+        inputs.result = Number(inputs.numOne) - Number(inputs.numTwo)
+    } else if(inputs.symbol === 'multiply'){
+        console.log(Number(inputs.numOne) * Number(inputs.numTwo));
+        inputs.result = Number(inputs.numOne) * Number(inputs.numTwo)
+    } else if(inputs.symbol === 'divide'){
+        console.log(Number(inputs.numOne) / Number(inputs.numTwo));
+        inputs.result = Number(inputs.numOne) / Number(inputs.numTwo)
+    } else{
+        console.log('I don\'t know how you broke this, but you did')
+    }
+}
 
 app.get('/calculate', (req, res) => {
     console.log('Getting /calculate!');
@@ -23,7 +39,9 @@ app.get('/calculate', (req, res) => {
 app.post('/calculate', (req, res) => {
     console.log('Posting to /calculate!');
 
-    calculationHistory.push(req.body)
+    calculate(req.body);
+
+    calculationHistory.push(req.body);
 
     res.sendStatus(201);
 })
