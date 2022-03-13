@@ -6,14 +6,22 @@ let numTwo = 0;
 let symbol = '';
 
 function readyNow() {
-    $('#equals').on('click', handleEquals);
-    $('#clearButton').on('click', handleClear);
+    $('.equals').on('click', handleEquals);
+    $('.clear').on('click', handleClear);
     $('#add').on('click', handleAdd);
     $('#subtract').on('click', handleSubtract);
     $('#multiply').on('click', handleMultiply);
     $('#divide').on('click', handleDivide);
+    $('.buttons').on('click', handleInput)
+}    
+
+function handleInput() {
+    $('#input').val($('#input').val() + $(this).text())
+
+    $('.symbol').on('click', function(){
+        $('.symbol').off('click');   
+    })
 }
-    
 
 function handleEquals() {
     numOne = $('#firstInput').val();
@@ -47,8 +55,11 @@ function handleEquals() {
 function handleClear() {
     $('#firstInput').val('');
     $('#secondInput').val('');
+    $('#input').val('');
     symbol = '';
     console.log('Cleared!')
+    
+    $('.buttons').on('click', handleInput)
 }
 
 function getCalculation() {
